@@ -147,11 +147,6 @@ namespace Polymorfisme
                                     {
                                         dierDatZegt.Zegt();
                                     }
-                                    //foreach (Dier dier in dieren)
-                                    //{
-                                    //    Console.Write(dier.Naam + " zegt ");
-                                    //    dier.Zegt();
-                                    //}
                                 }
                                 break;
                             case 4:
@@ -291,8 +286,8 @@ namespace Polymorfisme
                 //mijnKamers.Add(new Gang("Gang 2", 5, 5, 20, 30));
                 mijnKamers.Add(new Badkamer("badkamer", 5, 5, 1, 65));
                 mijnKamers.Add(new Salon("Salon", 10, 10, 1, 55));
-                mijnKamers.Add(new Kamer("Slaapkamer 1", 5, 7, 1, 70));
-                mijnKamers.Add(new Kamer("Slaapkamer 2", 5, 7, 6, 70));
+                mijnKamers.Add(new Slaapkamer("Slaapkamer 1", 5, 7, 1, 70));
+                mijnKamers.Add(new Slaapkamer("Slaapkamer 2", 5, 7, 6, 70));
                 mijnKamers.Add(new Gang("Gang 1", 3, 22, 11, 55));
                 mijnKamers.Add(new Gang("Gang 2", 5, 5, 6, 65));
                 Huis mijnHuis = new Huis(mijnKamers);
@@ -300,9 +295,8 @@ namespace Polymorfisme
                 Console.WriteLine(string.Format("\t{0,-7} {1,-5}: {2,-16} {3,3} {4,-5}", "Klassen", "Index", "Naam", "Opp.", "Prijs"));
                 foreach (Kamer kamer in mijnHuis.Kamers)
                 {
-                    string[] type = kamer.GetType().ToString().Split('.');
                     string msg = string.Format("\t{4,-10} {0,2}: {1,-15} {2,3}m² {3,-5:0.0}€"
-                                                , mijnHuis.Kamers.IndexOf(kamer) + 1, kamer.Naam, kamer.Oppervlakte, kamer.Prijs, type[1]);
+                                                , mijnHuis.Kamers.IndexOf(kamer) + 1, kamer.Naam, kamer.Oppervlakte, kamer.Prijs, kamer.GetType().ToString().Split('.')[1]);
                     Console.WriteLine(msg);
                 }
                 Console.WriteLine(string.Format("\t{0,35}:{1,6:0.0}€", "Totaal prijs", mijnHuis.BerekenPrijs()));

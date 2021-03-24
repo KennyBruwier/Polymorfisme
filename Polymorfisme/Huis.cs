@@ -42,7 +42,7 @@ namespace Polymorfisme
             }
         }
     }
-    class Kamer
+    abstract class Kamer
     {
         public int Oppervlakte { get { return Lengte * Breedte; }  }
         public int Lengte { get; set; }
@@ -51,31 +51,26 @@ namespace Polymorfisme
         public int X { get; set; }
         public string Naam { get; set; }
         public virtual double Prijs { get; set; }
-        public Kamer (string naam, int lengte, int breedte, int x, int y)
+        public Kamer(string naam, int lengte, int breedte, int x, int y)
         {
             Naam = naam;
             Lengte = lengte;
             Breedte = breedte;
-            X = x;
             Y = y;
-            Prijs = 400;
+            X = x;
         }
-        public void TekenKamer()
+
+        abstract public void TekenKamer();
+
+        protected void TekenKamerProtected(byte kleur)
         {
             int cursTop = Console.CursorTop;
             int cursLeft = Console.CursorLeft;
             int count = 0;
             char c;
-            byte kleur = (byte)Console.ForegroundColor;
+            byte curFKleur = (byte)Console.ForegroundColor;
             Console.SetCursorPosition(Y, X);
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            if (this is Badkamer)
-                Console.ForegroundColor = ConsoleColor.Blue;
-            if (this is Gang)
-                Console.ForegroundColor = ConsoleColor.Yellow;
-            if (this is Salon)
-                Console.ForegroundColor = ConsoleColor.Green;
-
+            Console.ForegroundColor = (ConsoleColor)kleur;
             for (int i = 0; i < Lengte; i++)
             {
                 StringBuilder stringBuilder = new StringBuilder();
@@ -98,7 +93,7 @@ namespace Polymorfisme
                 Console.Write(stringBuilder);
             }
             Console.SetCursorPosition(cursLeft,cursTop);
-            Console.ForegroundColor = (ConsoleColor)kleur;
+            Console.ForegroundColor = (ConsoleColor)curFKleur;
         }
     }
     class Badkamer : Kamer
@@ -114,6 +109,10 @@ namespace Polymorfisme
             Y = y;
             Prijs = 500;
         }
+        public override void TekenKamer()
+        {
+            TekenKamerProtected((byte)ConsoleColor.Cyan);
+        }
     }
     class Gang : Kamer
     {
@@ -128,12 +127,16 @@ namespace Polymorfisme
             Naam = naam;
             Prijs = Math.Round((double)Oppervlakte * prijsPerVierkanteMeter);
         }
+        public override void TekenKamer()
+        {
+            TekenKamerProtected((byte)ConsoleColor.Yellow);
+        }
     }
     class Salon : Kamer
     {
-        private bool SchouwAanwezig;
+        private bool schouwAanwezig;
         public override double Prijs { get => base.Prijs; set => base.Prijs = value; }
-
+        public bool SchouwAanwezig { get; set; }
         public Salon(string naam, int lengte, int breedte, int x, int y, bool schouwAanwezig = false): base(naam, lengte, breedte, x, y)
         {
             X = x;
@@ -145,5 +148,27 @@ namespace Polymorfisme
             if (schouwAanwezig) Prijs = 500;
             else Prijs = 300;
         }
+        public override void TekenKamer()
+        {
+            TekenKamerProtected((byte)ConsoleColor.Green);
+        }
     }
+    class Slaapkamer : Kamer
+    {
+        public override double Prijs { get => base.Prijs; set => base.Prijs = value; }
+        public override void TekenKamer()
+        {
+            TekenKamerProtected((byte)ConsoleColor.Cyan);
+        }
+        public Slaapkamer(string naam, int lengte, int breedte, int x, int y):base(naam,lengte,breedte,x,y)
+        {
+            Naam = naam;
+            Lengte = lengte;
+            Breedte = breedte;
+            X = x;
+            Y = y;
+            Prijs = 400;
+        }
+    }
+    
 }
