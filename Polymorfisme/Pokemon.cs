@@ -69,11 +69,6 @@ namespace Polymorfisme
         }
         public override bool Equals(object obj)
         {
-            /*Pokemon nObj;
-                    if (obj is Pokemon)
-                    {
-                        nObj = (Pokemon)obj;
-             */
             if (obj is Pokemon pokemon)
             {
                 if (    (pokemon.Attack_Base == Attack_Base) &&

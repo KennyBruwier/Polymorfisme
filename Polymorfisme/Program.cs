@@ -31,7 +31,6 @@ namespace Polymorfisme
                     case 2: PokemonsVergelijken(); break;
                     case 3: Magic(); break;
                     case 4: EenEigenHuis(); break;
-
                     default:
                         break;
                 }
@@ -145,7 +144,10 @@ namespace Polymorfisme
                                     }
                                     if (dierDatZegt!= null)
                                     {
-                                        dierDatZegt.Zegt();
+                                        foreach (Dier dier in dieren)
+                                        {
+                                            if (dier.GetType() == dierDatZegt.GetType()) dier.Zegt();
+                                        }
                                     }
                                 }
                                 break;
@@ -153,7 +155,6 @@ namespace Polymorfisme
                                 {
                                     opnieuw = false;
                                     dieren = new List<Dier>();
-
                                 }
                                 break;
                             case 5:
@@ -166,14 +167,11 @@ namespace Polymorfisme
                                 break;
                         }
                     }
-
                 }
-
             }
             void PokemonsVergelijken()
             {
                 Console.Clear();
-
                 Pokemon[] mijnPokemons = new Pokemon[10];
 
                 for (int i = 0; i < mijnPokemons.GetLength(0); i++)
@@ -276,6 +274,7 @@ namespace Polymorfisme
             }
             void EenEigenHuis()
             {
+                ConsoleColor consoleColor;
                 Console.Clear();
                 List<Kamer> mijnKamers = new List<Kamer>();
                 //mijnKamers.Add(new Badkamer("badkamer",5,5,15,30));
@@ -290,16 +289,23 @@ namespace Polymorfisme
                 mijnKamers.Add(new Slaapkamer("Slaapkamer 2", 5, 7, 6, 70));
                 mijnKamers.Add(new Gang("Gang 1", 3, 22, 11, 55));
                 mijnKamers.Add(new Gang("Gang 2", 5, 5, 6, 65));
+                mijnKamers.Add(new Garage("Garage 1", 6, 22, 14, 55));
+                mijnKamers.Add(new Tuin("Tuin",19, 20, 1, 77));
+                mijnKamers.Add(new Zwembad("Zwembad", 5, 10, 10, 85));
+                mijnKamers.Add(new Terras("Terras", 15, 7,4,78));
                 Huis mijnHuis = new Huis(mijnKamers);
                 Console.WriteLine("\tHuis bevat volgende kamers:\n");
                 Console.WriteLine(string.Format("\t{0,-7} {1,-5}: {2,-16} {3,3} {4,-5}", "Klassen", "Index", "Naam", "Opp.", "Prijs"));
                 foreach (Kamer kamer in mijnHuis.Kamers)
                 {
-                    string msg = string.Format("\t{4,-10} {0,2}: {1,-15} {2,3}m² {3,-5:0.0}€"
+                    string msg = string.Format("\t{4,-10} {0,2}: {1,-15} {2,3}m² {3,-5:0}€"
                                                 , mijnHuis.Kamers.IndexOf(kamer) + 1, kamer.Naam, kamer.Oppervlakte, kamer.Prijs, kamer.GetType().ToString().Split('.')[1]);
                     Console.WriteLine(msg);
                 }
-                Console.WriteLine(string.Format("\t{0,35}:{1,6:0.0}€", "Totaal prijs", mijnHuis.BerekenPrijs()));
+                consoleColor = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine(string.Format("\t{0,31}{2,3}m² {1,-5:0}€", "Totaal ", mijnHuis.BerekenPrijs(),mijnHuis.BerekenOpp()));
+                Console.ForegroundColor = consoleColor;
                 mijnHuis.TekenHuis();
                 Console.ReadKey(true);
             }

@@ -33,7 +33,7 @@ namespace Polymorfisme
             int cursY = Console.CursorLeft;
 
             Console.SetCursorPosition((Console.WindowWidth / 2) - msg.Length / 2, Console.WindowHeight / 2);
-            Console.Write(GetType().ToString().Split('.')[1]+ ": " +msg);
+            Console.Write(Naam + " de " + GetType().ToString().Split('.')[1]+ ": " +msg);
             Console.SetCursorPosition(cursY, cursX);
             Console.ReadKey(true);
 
