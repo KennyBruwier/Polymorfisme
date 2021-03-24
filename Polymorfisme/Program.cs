@@ -124,11 +124,34 @@ namespace Polymorfisme
                                 break;
                             case 3:
                                 {
-                                    foreach (Dier dier in dieren)
+                                    Dier dierDatZegt = null;
+                                    List<string> DierNamens;
+                                    DierNamens = new List<string>();
+                                    foreach (int  i in Enum.GetValues(typeof(DierSoort)))
                                     {
-                                        Console.Write(dier.Naam + " zegt ");
-                                        dier.Zegt();
+                                        DierNamens.Add(Enum.GetName(typeof(DierSoort), i)); 
                                     }
+                                    switch(SelectMenu(false,DierNamens.ToArray()))
+                                    {
+                                        case 1: dierDatZegt = new Kat();
+                                            break;
+                                        case 2: dierDatZegt = new Hond();
+                                            break;
+                                        case 3: dierDatZegt = new Vis();
+                                            break;
+                                        case 4: dierDatZegt = new Koe();
+                                            break;
+                                        default: break;
+                                    }
+                                    if (dierDatZegt!= null)
+                                    {
+                                        dierDatZegt.Zegt();
+                                    }
+                                    //foreach (Dier dier in dieren)
+                                    //{
+                                    //    Console.Write(dier.Naam + " zegt ");
+                                    //    dier.Zegt();
+                                    //}
                                 }
                                 break;
                             case 4:

@@ -24,7 +24,19 @@ namespace Polymorfisme
 
         public void OverZicht()
         {
+
             Console.WriteLine(string.Format("\t{0,-6}:{1,-30}\t{2,4}kg", Soort, Naam, Gewicht));
+        }
+        public void DierMsg(string msg)
+        {
+            int cursX = Console.CursorTop;
+            int cursY = Console.CursorLeft;
+
+            Console.SetCursorPosition((Console.WindowWidth / 2) - msg.Length / 2, Console.WindowHeight / 2);
+            Console.Write(GetType().ToString().Split('.')[1]+ ": " +msg);
+            Console.SetCursorPosition(cursY, cursX);
+            Console.ReadKey(true);
+
         }
 
     }
@@ -34,7 +46,7 @@ namespace Polymorfisme
         public override DierSoort Soort { get => base.Soort; set => base.Soort = value; }
         public override void Zegt()
         {
-            Console.WriteLine("Who's the boss? You wish!");
+            DierMsg("Who's the boss? You wish!");
         }
         public Kat(int gewicht, string naam = "Kat")
         {
@@ -54,7 +66,7 @@ namespace Polymorfisme
 
         public override void Zegt()
         {
-            Console.WriteLine("Eten! eten! eten! ... waar is mijn eten!!!");
+            DierMsg("Eten! eten! eten! ... waar is mijn eten!!!");
         }
         public Hond(int gewicht, string naam = "Hond")
         {
@@ -73,7 +85,7 @@ namespace Polymorfisme
         public override DierSoort Soort { get => base.Soort; set => base.Soort = value; }
         public override void Zegt()
         {
-            Console.WriteLine(" ....  ....  .... !#?! .... ");
+            DierMsg(" ....  ....  .... !#?! .... ");
         }
         public Vis(int gewicht, string naam = "Vis")
         {
@@ -92,7 +104,7 @@ namespace Polymorfisme
         public override DierSoort Soort { get => base.Soort; set => base.Soort = DierSoort.Koe; }
         public override void Zegt()
         {
-            Console.WriteLine("LEEEEEEEEOOOOOO!");
+            DierMsg("LEEEEEEEEOOOOOO!");
         }
         public Koe(int gewicht, string naam = "Koe")
         {

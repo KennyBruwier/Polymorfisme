@@ -69,18 +69,21 @@ namespace Polymorfisme
         }
         public override bool Equals(object obj)
         {
-            Pokemon nObj = new Pokemon();
-            if (obj is Pokemon)
+            /*Pokemon nObj;
+                    if (obj is Pokemon)
+                    {
+                        nObj = (Pokemon)obj;
+             */
+            if (obj is Pokemon pokemon)
             {
-                nObj = (Pokemon)obj;
-                if ((nObj.Attack_Base == Attack_Base) &&
-                        (nObj.Defense_Base == Defense_Base) &&
-                        (nObj.HP_Base == HP_Base) &&
-                        (nObj.Speed_Base == Speed_Base) &&
-                        (nObj.SpecialAttack_Base == SpecialAttack_Base) &&
-                        (nObj.SpecialDefense_Base == SpecialDefense_Base) &&
-                        (nObj.Naam == Naam) &&
-                        (nObj.Level == Level)
+                if (    (pokemon.Attack_Base == Attack_Base) &&
+                        (pokemon.Defense_Base == Defense_Base) &&
+                        (pokemon.HP_Base == HP_Base) &&
+                        (pokemon.Speed_Base == Speed_Base) &&
+                        (pokemon.SpecialAttack_Base == SpecialAttack_Base) &&
+                        (pokemon.SpecialDefense_Base == SpecialDefense_Base) &&
+                        (pokemon.Naam == Naam) &&
+                        (pokemon.Level == Level)
                     ) 
                     return true;
             }
